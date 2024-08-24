@@ -2,8 +2,8 @@ package com.caju.services;
 
 import com.caju.model.Balance;
 import com.caju.repository.BalanceRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
