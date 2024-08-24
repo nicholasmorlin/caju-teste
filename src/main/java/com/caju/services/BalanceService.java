@@ -1,9 +1,8 @@
 package com.caju.services;
 
 import com.caju.model.Balance;
-import com.caju.model.Category;
 import com.caju.repository.BalanceRepository;
-import org.modelmapper.ModelMapper;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -13,17 +12,16 @@ public class BalanceService {
 
     private final BalanceRepository balanceRepository;
 
-    private final ModelMapper modelMapper;
-
-    public BalanceService(BalanceRepository balanceRepository, ModelMapper modelMapper) {
+    public BalanceService(BalanceRepository balanceRepository) {
         this.balanceRepository = balanceRepository;
-        this.modelMapper = modelMapper;
     }
 
+    @Transactional
     public Balance findBalanceByAccountIdAndCategoryId(Long accountId, Long categoryId) {
         return balanceRepository.findBalanceByAccountIdAndCategoryId(accountId, categoryId);
     }
 
+    @Transactional
     public Balance findBalanceByAccountIdAndCategoryType(Long accountId, String type) {
         return balanceRepository.findBalanceByAccountIdAndCategoryType(accountId, type);
     }
