@@ -1,9 +1,9 @@
 package com.caju.model;
 
-import com.caju.controllers.dto.request.PaymentAuthorizerRequest;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "payment_history", schema = "caju")
@@ -21,17 +21,26 @@ public class PaymentHistory {
     @JoinColumn(name = "mccId", referencedColumnName = "id")
     private Mcc mccId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoryId", referencedColumnName = "id")
+    private Category categoryId;
+
     private BigDecimal amount;
 
     private String merchant;
 
-    public PaymentHistory() {}
+    private LocalDateTime creationDate;
 
-    public PaymentHistory(Account accountId, Mcc mccId, BigDecimal amount, String merchant) {
+    public PaymentHistory() {
+    }
+
+    public PaymentHistory(Account accountId, Mcc mccId, BigDecimal amount, String merchant, Category categoryId) {
         this.accountId = accountId;
         this.mccId = mccId;
         this.amount = amount;
         this.merchant = merchant;
+        this.categoryId = categoryId;
+        this.creationDate = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -72,5 +81,13 @@ public class PaymentHistory {
 
     public void setMerchant(String merchant) {
         this.merchant = merchant;
+    }
+
+    public Category getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Category categoryId) {
+        this.categoryId = categoryId;
     }
 }
