@@ -6,6 +6,8 @@ import com.caju.helpers.PaymentAuthorizerStatusCodes;
 import com.caju.model.*;
 import com.caju.model.enums.CategoryType;
 import com.caju.repository.PaymentAuthorizerRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ import static com.caju.util.MathCalcsValidationUtil.validateBalance;
 
 @Service
 public class PaymentAuthorizerService {
+
+    private static final Logger logger = LoggerFactory.getLogger(BalanceService.class);
     private final MccService mccService;
     private final BalanceService balanceService;
     private final MerchantService merchantService;

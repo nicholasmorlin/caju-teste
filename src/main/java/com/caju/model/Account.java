@@ -13,27 +13,11 @@ public class Account {
     private String document;
     private String name;
 
-    public Long getId() {
-        return id;
-    }
+    public Account(){}
 
-    public void setId(Long id) {
+    public Account(Long id, String document, String name) {
         this.id = id;
-    }
-
-    public String getDocument() {
-        return document;
-    }
-
-    public void setDocument(String document) {
         this.document = document;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 }

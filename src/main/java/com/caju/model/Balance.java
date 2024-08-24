@@ -9,40 +9,34 @@ import java.math.BigDecimal;
 public class Balance {
 
     @Id
-    private Integer id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "accountId", referencedColumnName = "id")
     private Account accountId;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoryId", referencedColumnName = "id")
     private Category categoryId;
 
     private BigDecimal balance;
 
-    public Integer getId() {
-        return id;
-    }
+    public Balance(){}
 
-    public void setId(Integer id) {
+    public Balance(Long id, Account accountId, Category categoryId, BigDecimal balance) {
         this.id = id;
+        this.accountId = accountId;
+        this.categoryId = categoryId;
+        this.balance = balance;
     }
 
     public Account getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(Account accountId) {
-        this.accountId = accountId;
-    }
 
     public Category getCategoryId() {
         return categoryId;
-    }
-
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
     }
 
     public BigDecimal getBalance() {

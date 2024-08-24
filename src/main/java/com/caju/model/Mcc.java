@@ -15,27 +15,19 @@ public class Mcc {
 
     private String code;
 
+    public Mcc(){}
+
+    public Mcc(Long id, Category categoryId, String code) {
+        this.id = id;
+        this.categoryId = categoryId;
+        this.code = code;
+    }
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Category getCategoryId() {
         return categoryId;
-    }
-
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 }
