@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class Mcc {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -16,6 +17,11 @@ public class Mcc {
     private String code;
 
     public Mcc(){}
+
+    public Mcc(Category categoryId, String code) {
+        this.categoryId = categoryId;
+        this.code = code;
+    }
 
     public Mcc(Long id, Category categoryId, String code) {
         this.id = id;
@@ -29,5 +35,9 @@ public class Mcc {
 
     public Category getCategoryId() {
         return categoryId;
+    }
+
+    public String getCode() {
+        return code;
     }
 }

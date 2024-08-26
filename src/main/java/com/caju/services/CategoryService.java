@@ -9,6 +9,7 @@ import com.caju.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,5 +36,9 @@ public class CategoryService {
                 .stream()
                 .map(CategoryConverter::toResponse)
                 .collect(Collectors.toList());
+    }
+
+    public Optional<Category> findCategoryByType(String type) {
+        return categoryRepository.findCategoryByType(type);
     }
 }
