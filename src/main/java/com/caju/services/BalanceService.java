@@ -61,7 +61,7 @@ public class BalanceService {
         saveBalance(balance);
     }
 
-    public void saveBalance(Balance balance) {
+    private void saveBalance(Balance balance) {
         balanceRepository.save(balance);
     }
 

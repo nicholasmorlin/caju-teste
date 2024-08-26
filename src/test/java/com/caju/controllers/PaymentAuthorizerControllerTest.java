@@ -109,66 +109,6 @@ class PaymentAuthorizerControllerTest {
                 .andExpect(jsonPath("$.code").value("07"));
     }
 
-    @Test
-    void shouldReturnErrorIfAccountIdIsMissing() throws Exception {
-
-        final var paymentBody = """
-                {
-                    "accountId": ,
-                    "amount": "100.0",
-                    "mcc": "5541",
-                    "merchant": "PADARIA DO JOAQUIM"
-                }
-                """;
-
-        mockMvc
-                .perform(
-                        MockMvcRequestBuilders.post(V1_PAYMENT_AUTHORIZER)
-                                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                                .content(paymentBody))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void shouldReturnErrorIfAmountIsMissing() throws Exception {
-
-        final var paymentBody = """
-                {
-                    "accountId": 1,
-                    "amount": ,
-                    "mcc": "5541",
-                    "merchant": "PADARIA DO JOAQUIM"
-                }
-                """;
-
-        mockMvc
-                .perform(
-                        MockMvcRequestBuilders.post(V1_PAYMENT_AUTHORIZER)
-                                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                                .content(paymentBody))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void shouldReturnErrorIfMerchantIsMissing() throws Exception {
-
-        final var paymentBody = """
-                {
-                    "accountId": 1,
-                    "amount": "100.0",
-                    "mcc": "5541",
-                    "merchant": 
-                }
-                """;
-
-        mockMvc
-                .perform(
-                        MockMvcRequestBuilders.post(V1_PAYMENT_AUTHORIZER)
-                                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                                .content(paymentBody))
-                .andExpect(status().isBadRequest());
-    }
-
     private ResponseEntity<PaymentAuthorizerResponse> generateResponseByStatus(PaymentAuthorizerStatusCodes status) {
         return ResponseEntity.ok().body(new PaymentAuthorizerResponse(status.getCode()));
     }

@@ -133,5 +133,33 @@ public class PaymentAuthorizerServiceTest {
         assertEquals("07", response.getBody().code());
     }
 
+    @Test
+    void shouldReturnUnavailableBecauseAccountIdIsNull() {
+        PaymentAuthorizerRequest paymentAuthorizerRequest = createPaymentPayload(
+                null, BigDecimal.valueOf(200), "5541", "ACOUGUE DO CLEBER");
 
+        ResponseEntity<PaymentAuthorizerResponse> response = service.paymentAuthorizer(paymentAuthorizerRequest);
+
+        assertEquals("07", response.getBody().code());
+    }
+
+    @Test
+    void shouldReturnUnavailableBecauseAmountIsNull() {
+        PaymentAuthorizerRequest paymentAuthorizerRequest = createPaymentPayload(
+                1L, null, "5541", "ACOUGUE DO CLEBER");
+
+        ResponseEntity<PaymentAuthorizerResponse> response = service.paymentAuthorizer(paymentAuthorizerRequest);
+
+        assertEquals("07", response.getBody().code());
+    }
+
+    @Test
+    void shouldReturnUnavailableBecauseMerchantIsBlank() {
+        PaymentAuthorizerRequest paymentAuthorizerRequest = createPaymentPayload(
+                1L, BigDecimal.valueOf(2000), "5541", "");
+
+        ResponseEntity<PaymentAuthorizerResponse> response = service.paymentAuthorizer(paymentAuthorizerRequest);
+
+        assertEquals("07", response.getBody().code());
+    }
 }

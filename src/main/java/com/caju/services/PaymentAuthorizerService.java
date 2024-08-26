@@ -6,6 +6,7 @@ import com.caju.helpers.PaymentAuthorizerStatusCodes;
 import com.caju.model.*;
 import com.caju.model.enums.CategoryType;
 import com.caju.repository.PaymentAuthorizerRepository;
+import org.apache.coyote.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,8 @@ public class PaymentAuthorizerService {
     public ResponseEntity<PaymentAuthorizerResponse> paymentAuthorizer(PaymentAuthorizerRequest paymentAuthorizerRequest) {
 
         try {
+            validatePayload(paymentAuthorizerRequest);
+
             final Optional<Merchant> merchantOptional = merchantService.findCategoryByMerchantName(paymentAuthorizerRequest.merchant());
             Optional<Mcc> mccOptional = Optional.empty();
 
@@ -47,6 +50,23 @@ public class PaymentAuthorizerService {
             return mapToPaymentAuthorizerResponse(authorizeTransaction(paymentAuthorizerRequest, mccOptional, null));
         } catch (Exception e) {
             return mapToPaymentAuthorizerResponse(UNAVALIABLE);
+        }
+    }
+
+    private static void validatePayload(PaymentAuthorizerRequest payload) throws BadRequestException {
+        if (Objects.isNull(payload.accountId())) {
+            logger.error("AccountId is null");
+            throw new BadRequestException("AccountId is null");
+        }
+
+        if (Objects.isNull(payload.amount())) {
+            logger.error("Amount is null");
+            throw new BadRequestException("Amount is null");
+        }
+
+        if (payload.merchant().isBlank()) {
+            logger.error("Merchant is null");
+            throw new BadRequestException("Merchant is null");
         }
     }
 

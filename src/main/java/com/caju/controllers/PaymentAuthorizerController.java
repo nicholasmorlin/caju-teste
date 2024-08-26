@@ -22,7 +22,7 @@ public class PaymentAuthorizerController {
     }
 
     @PostMapping
-    public ResponseEntity<PaymentAuthorizerResponse> authorizer(@RequestBody @Validated PaymentAuthorizerRequest paymentAuthorizerRequest) {
+    public ResponseEntity<PaymentAuthorizerResponse> authorizer(@RequestBody PaymentAuthorizerRequest paymentAuthorizerRequest) {
         return service.paymentAuthorizer(paymentAuthorizerRequest);
     }
 }
