@@ -16,11 +16,18 @@ public class Merchant {
 
     private String name;
 
+    public Merchant(Category category, String name) {
+        this.category = category;
+        this.name = name;
+    }
+
     public Merchant(Long id, Category category, String name) {
         this.id = id;
         this.category = category;
         this.name = name;
     }
+
+    public Merchant() {}
 
     public Long getId() {
         return id;
@@ -28,5 +35,9 @@ public class Merchant {
 
     public Category getCategory() {
         return category;
+    }
+
+    public String getName() {
+        return name;
     }
 }

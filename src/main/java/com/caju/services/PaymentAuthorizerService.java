@@ -15,7 +15,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import static com.caju.helpers.PaymentAuthorizerStatusCodes.*;
-import static com.caju.util.MathCalcsValidationUtil.validateBalance;
+import static com.caju.helpers.MathCalcsValidationUtil.validateBalance;
 
 @Service
 public class PaymentAuthorizerService {

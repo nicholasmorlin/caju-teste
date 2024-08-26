@@ -1,4 +1,4 @@
-package com.caju.util;
+package com.caju.helpers;
 
 import java.math.BigDecimal;
 
