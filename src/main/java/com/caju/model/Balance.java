@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 public class Balance {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -22,6 +23,12 @@ public class Balance {
     private BigDecimal balance;
 
     public Balance(){}
+
+    public Balance(Account accountId, Category categoryId, BigDecimal balance) {
+        this.accountId = accountId;
+        this.categoryId = categoryId;
+        this.balance = balance;
+    }
 
     public Balance(Long id, Account accountId, Category categoryId, BigDecimal balance) {
         this.id = id;

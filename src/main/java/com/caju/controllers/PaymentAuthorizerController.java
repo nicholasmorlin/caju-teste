@@ -6,6 +6,7 @@ import com.caju.controllers.dto.response.PaymentAuthorizerResponse;
 import com.caju.controllers.dto.response.PaymentHistoryResponse;
 import com.caju.services.PaymentAuthorizerService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class PaymentAuthorizerController {
     }
 
     @PostMapping
-    public ResponseEntity<PaymentAuthorizerResponse> authorizer(@RequestBody PaymentAuthorizerRequest paymentAuthorizerRequest) {
+    public ResponseEntity<PaymentAuthorizerResponse> authorizer(@RequestBody @Validated PaymentAuthorizerRequest paymentAuthorizerRequest) {
         return service.paymentAuthorizer(paymentAuthorizerRequest);
     }
 }

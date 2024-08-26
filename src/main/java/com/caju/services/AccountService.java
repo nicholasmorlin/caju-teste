@@ -9,6 +9,8 @@ import com.caju.model.Account;
 import com.caju.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AccountService {
 
@@ -29,8 +31,12 @@ public class AccountService {
     }
 
     public AccountResponse getAccountById(Long accountId) {
-        return accountRepository.findById(accountId)
+        return findAccountById(accountId)
                 .map(AccountConverter::toResponse)
                 .orElseThrow(() -> new NotFoundException("Account is not registered"));
+    }
+
+    public Optional<Account> findAccountById(Long accountId) {
+        return accountRepository.findById(accountId);
     }
 }
