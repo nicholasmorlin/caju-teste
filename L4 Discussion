@@ -1,0 +1,12 @@
+Sobre o problema de Race condition, primeiramente é importante saber toda a arquitetura do projeto.
+No meu trabalho rodamos a aplicação na nuvem e temos muitas instâncias da aplicação rodando ao mesmo tempo.
+Para evitar o problema de race condition é importante que todas as máquinas saibam que um recurso está bloqueado.
+
+Existem várias formas de evitar o race condition, uma bastante utilizada por mim é a biblioteca do Redis chamada Redisson,
+ela oferece recursos de Lock bem interessantes. Como o redis é um recurso externo e todas as máquinas estão conectadas a ele
+não há problema nenhum em utilizá-lo. Consegui sanar todos os problemas que tivemos de race condition com ele.
+Note que trabalhamos apenas com bancos não relacionais.
+
+Já no projeto que fiz, utilizei um banco relacional o que acaba tendo um forte recurso que é o Lock pessimista.
+Basicamente é impossível acessar o recurso se já houver alguem utilizando-o. Isso pode gerar problemas de timeout?
+Pode, porém a aplicação roda muito rápido e as operações são muito simples. O mais importante é garantir a consistência dos dados.
