@@ -23,9 +23,7 @@ public class PaymentHistoryService {
         List<PaymentHistory> historyList = paymentHistoryRepository.findByFilter(
                 filter.accountId(),
                 filter.category(),
-                filter.merchant(),
-                filter.startDate(),
-                filter.endDate()
+                filter.merchant()
         );
 
         return historyList.stream().map(PaymentHistoryConverter::toResponse).collect(Collectors.toList());

@@ -2,7 +2,6 @@ package com.caju.controllers;
 
 import com.caju.controllers.dto.request.PaymentHistoryRequestFilter;
 import com.caju.controllers.dto.response.PaymentHistoryResponse;
-import com.caju.model.PaymentHistory;
 import com.caju.services.PaymentHistoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

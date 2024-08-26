@@ -5,6 +5,7 @@ import com.caju.controllers.dto.response.AccountResponse;
 import com.caju.services.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,7 +20,7 @@ public class AccountController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void createAccount(@RequestBody AccountCreationRequest request) {
+    public void createAccount(@RequestBody @Validated AccountCreationRequest request) {
         accountService.createAccount(request);
     }
 

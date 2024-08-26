@@ -4,7 +4,6 @@ import com.caju.controllers.dto.request.PaymentAuthorizerRequest;
 import com.caju.controllers.dto.response.PaymentAuthorizerResponse;
 import com.caju.helpers.PaymentAuthorizerStatusCodes;
 import com.caju.model.*;
-import com.caju.model.enums.CategoryType;
 import com.caju.repository.PaymentAuthorizerRepository;
 import org.apache.coyote.BadRequestException;
 import org.slf4j.Logger;
@@ -15,12 +14,13 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 import java.util.Optional;
 
-import static com.caju.helpers.PaymentAuthorizerStatusCodes.*;
 import static com.caju.helpers.MathCalcsValidationUtil.validateBalance;
+import static com.caju.helpers.PaymentAuthorizerStatusCodes.*;
 
 @Service
 public class PaymentAuthorizerService {
 
+    private final static String CASH = "CASH";
     private static final Logger logger = LoggerFactory.getLogger(BalanceService.class);
     private final MccService mccService;
     private final BalanceService balanceService;
@@ -104,7 +104,7 @@ public class PaymentAuthorizerService {
     }
 
     private PaymentAuthorizerStatusCodes handleFallbackAuthorizer(PaymentAuthorizerRequest paymentAuthorizerRequest) {
-        Balance cashBalance = balanceService.findBalanceByAccountIdAndCategoryType(paymentAuthorizerRequest.accountId(), CategoryType.CASH.name());
+        Balance cashBalance = balanceService.findBalanceByAccountIdAndCategoryType(paymentAuthorizerRequest.accountId(), CASH);
 
         if (validateBalance(paymentAuthorizerRequest.amount(), cashBalance.getBalance())) {
             balanceService.saveNewBalance(cashBalance, paymentAuthorizerRequest.amount());
